@@ -1,0 +1,31 @@
+services:
+    rocm-pytorch:
+        build:
+            context: .
+        image: custom-rocm-pytorch:latest
+        container_name: rocm-pytorch
+        restart: "no"
+
+        devices:
+            - /dev/kfd
+            - /dev/dri
+
+        group_add:
+            - video
+            - render
+            - kvm
+
+        cap_add:
+            - SYS_PTRACE
+        security_opt:
+            - seccomp:unconfined
+
+        volumes:
+            - /workspaces:/workspaces
+
+        ipc: host
+        shm_size: 16G
+
+        command: tail -f /dev/null
+        user: "1000:1000"
+
