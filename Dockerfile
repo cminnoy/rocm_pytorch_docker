@@ -15,6 +15,7 @@ RUN apt-get update \
      wget \
      tree \
      git \
+     cmake \
 && rm -rf /var/lib/apt/lists/*
 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -28,6 +29,9 @@ RUN groupmod -g 44 video \
      groupmod -g 992 kvm || true; \
    fi
 
-RUN /opt/venv/bin/pip install numba numpy Pillow diskcache scikit-learn kornia onnx onnxscript tensorboard torchsummary torchviz torchprofile
-
+RUN /opt/venv/bin/pip install numba numpy Pillow diskcache scikit-learn kornia
+RUN /opt/venv/bin/pip install onnx onnxscript onnxsim onnxruntime
+RUN /opt/venv/bin/pip install tensorboard torchsummary torchviz torchprofile
+RUN /opt/venv/bin/pip install flatbuffers humanfriendly coloredlogs
+ENV OMP_NUM_THREADS 4
 CMD ["tail", "-f", "/dev/null"]
