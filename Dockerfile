@@ -33,5 +33,9 @@ RUN /opt/venv/bin/pip install numba numpy Pillow diskcache scikit-learn kornia
 RUN /opt/venv/bin/pip install onnx onnxscript onnxsim onnxruntime
 RUN /opt/venv/bin/pip install tensorboard torchsummary torchviz torchprofile
 RUN /opt/venv/bin/pip install flatbuffers humanfriendly coloredlogs
+RUN /opt/venv/bin/pip install qdrant-client
+RUN /opt/venv/bin/pip install transformers sentence-transformers --no-deps
+RUN /opt/venv/bin/pip install pymupdf tokenizers huggingface-hub safetensors requests regex tqdm
 ENV OMP_NUM_THREADS 4
+ENV TORCH_HOME /workspaces/.cache
 CMD ["tail", "-f", "/dev/null"]
